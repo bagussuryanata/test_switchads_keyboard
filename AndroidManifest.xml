@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.custom.magickeyboard">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:name="com.app.custom.magickeyboard.utils.MyPhotoKeyboardApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:networkSecurityConfig="@xml/network_config"
+        android:usesCleartextTraffic="true"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:manageSpaceActivity="com.app.custom.magickeyboard.activity.CreateKeyboardActivity"
+        android:noHistory="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.app.custom.magickeyboard.activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:exported="false" android:name="com.app.custom.magickeyboard.services.MyIntentService" android:noHistory="true"/>
+
+        <service
+            android:name="com.app.custom.magickeyboard.customkeyboard.SoftKeyboard"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
+        </service>
+
+        <activity
+            android:name="com.app.custom.magickeyboard.customkeyboard.ImePreferences"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.app.custom.magickeyboard.activity.CreateKeyboardActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.app.custom.magickeyboard.activity.MainActivity"
+            android:noHistory="true"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.app.custom.magickeyboard.activity.CropActivity"
+            android:noHistory="true"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.app.custom.magickeyboard.activity.SetKeyboardActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+
+
+        <service
+            android:name="com.app.custom.magickeyboard.utils.MyDownloadService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.app.custom.magickeyboard.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ae8696c9f626fd42728f7563dcd18f9e781c6a2a" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
+
+        <activity
+            android:name="com.facebook.ads.AudienceNetworkActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="false" />
+
+    </application>
+
+</manifest>
